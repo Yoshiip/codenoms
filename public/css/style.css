@@ -1,0 +1,78 @@
+:root {
+  --red-bg: linear-gradient(2.5deg, #c3212a, #ff3636);
+  --blue-bg: linear-gradient(2.5deg, #2154c3, #3686ff);
+  --black-bg: linear-gradient(2.5deg, #222121, #383737);
+}
+
+body,
+html {
+  margin: 0;
+  height: 100%;
+  color: white;
+}
+
+body {
+  background-color: #c3212a;
+  background-image: url("../images/background.png");
+  background-blend-mode: multiply;
+  background-size: cover;
+  background-position-x: center;
+  background-position-y: 0;
+}
+
+* {
+  font-family: "Kanit", sans-serif;
+}
+
+#name_container,
+#menu_container,
+#lobby_container,
+#game_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 100%;
+  flex-direction: column;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+header li,
+header ul,
+header span {
+  display: inline;
+}
+
+header li:not(:last-child):after {
+  content: ",";
+}
+
+/* LOBBY */
+
+.container {
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+button {
+  border-radius: 128px;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(0deg, rgb(67, 185, 20), rgb(117, 231, 23));
+  transition: 0.1s;
+}
+
+button:hover {
+  transform: scale(1.25);
+  color: rgb(19, 19, 19);
+  background: linear-gradient(0deg, rgb(85, 226, 29), rgb(133, 248, 38));
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

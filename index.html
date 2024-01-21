@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codenoms</title>
+    <link rel="shortcut icon" href="/images/logo.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/lobby.css" />
+    <link rel="stylesheet" href="css/game.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"
+      integrity="sha512-xi/RZRIF/S0hJ+yJJYuZ5yk6/8pCiRlEXZzoguSMl+vk2i3m6UjUO/WcZ11blRL/O+rnj94JRGwt/CHbc9+6EA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div id="name_container">
+      <div class="container">
+        <input
+          minlength="1"
+          maxlength="16"
+          id="menu_username"
+          name="menu_username"
+          type="text"
+          placeholder="Votre nom"
+        />
+        <button onclick="submitName()">Valider</button>
+      </div>
+    </div>
+    <div id="menu_container">
+      <main>
+        <div class="container">
+          <h1>Codenoms</h1>
+
+          <p>
+            Bonjour, <span id="lobby_name"></span>
+            <button onclick="screenChangeToName()">Changer de nom</button>
+          </p>
+          <button onclick="menuHostGame()">Créer une partie</button><br />
+          <hr />
+          <p>Ou rejoignez une partie:</p>
+          <input placeholder="Code de la partie" id="menu_room_code" type="text" maxlength="5" />
+          <button onclick="menuJoinGame()">Rejoindre</button><br />
+          <!-- <span id="menu_error">Erreur!</span> -->
+        </div>
+        <div class="container">
+          <h1>
+            Parties publique
+            <button onclick="getPublicGames()">Rafraîchir</button>
+          </h1>
+          <ul id="menu_public_games">
+            Aucune partie trouvée!
+          </ul>
+        </div>
+      </main>
+    </div>
+    <div id="lobby_container">
+      <main>
+        <div class="container">
+          <!-- <button onclick="quitGame()">Quitter</button> -->
+          <h1 id="lobby_room_name"></h1>
+          <h2>Rôle</h2>
+          <div class="select">
+            <button
+              id="lobby_detective_btn_grp"
+              onclick="SetRoleDetective()"
+            >
+              <img
+                class="invert"
+                src="images/icons/detective.svg"
+                alt="Detective icon"
+              />
+              <p>Détective</p>
+            </button>
+            <button id="lobby_spy_btn_grp" onclick="SetRoleSpy()">
+              <img class="invert" src="images/icons/spy.svg" alt="Spy icon" />
+              <p>Espion</p>
+            </button>
+          </div>
+          <h2>Équipe</h2>
+          <div class="select">
+            <button id="lobby_red_btn_grp" onclick="SetTeamRed()">
+              <img src="images/icons/red_team.svg" alt="Spy icon" />
+              <p>Rouge</p>
+            </button>
+            <button id="lobby_blue_btn_grp" onclick="SetTeamBlue()">
+              <img src="images/icons/blue_team.svg" alt="Detective icon" />
+              <p>Bleu</p>
+            </button>
+          </div>
+          <div class="admin_only">
+            <h2>Dictionnaire</h2>
+            <div class="select">
+              <button id="lobby_fr_btn_grp" onclick="SetLang('fr')">
+                <p>Français</p>
+              </button>
+              <button id="lobby_en_btn_grp" onclick="SetLang('en')">
+                <p>English</p>
+              </button>
+            </div>
+          </div>
+          <!-- <h2>Paramètres</h2>
+          <input type="checkbox" name="sudden_death" id="sudden_death" />
+          <label for="sudden_death">Mort subite</label><br />
+          <input type="checkbox" name="cooperation" id="cooperation" />
+          <label for="cooperation">Mode coopération</label><br /> -->
+          <button class="admin_only" id="lobby_start_button" onclick="lobbyStartGame()">
+            Démarrer la partie
+          </button>
+        </div>
+        <div class="container">
+          <h1>Joueurs</h2>
+          <h2>Code</h2>
+          <input
+            type="text"
+            id="lobby_room_id"
+            readonly
+            onclick="lobbyCopyRoomID()"
+          />
+          <h2>Liste des joueurs</h2>
+          <ul id="lobby_players_list"></ul>
+        </div>
+      </main>
+    </div>
+    <div id="game_container">
+      <header>
+        <div class="teams">
+          <div class="red">
+            <div class="detectives">
+              <span class="bold">Detectives</span>
+              <ul id="header_red_detectives"></ul>
+            </div>
+            <div class="spies">
+              <span class="bold">Espions</span>
+              <ul id="header_red_spies"></ul>
+            </div>
+            <div class="remaining">
+              <span class="bold" id="game_header_red_words_left">9</span>
+              <span>restants</span>
+            </div>
+          </div>
+          <div class="blue">
+            <div class="detectives">
+              <span class="bold">Detectives</span>
+              <ul id="header_blue_detectives"></ul>
+            </div>
+            <div class="spies">
+              <span class="bold">Espions</span>
+              <ul id="header_blue_spies"></ul>
+            </div>
+            <div class="remaining">
+              <span class="bold" id="game_header_blue_words_left">9</span>
+              <span>restants</span>
+            </div>
+          </div>
+        </div>
+      </header>
+      <h1 id="game_player_turn"></h1>
+      <div class="container" id="guess">
+        <h3 id="guess_user"></h3>
+        <h1 id="guess_message"></h1>
+      </div>
+      <main>
+        <div id="cards_grid"></div>
+        <div class="container chat">
+          <h1>Historique</h1>
+          <ul id="messages"></ul>
+        </div>
+      </main>
+
+      <div id="spy_guess">
+        <input type="text" id="guess_word" />
+        en
+        <select name="" id="guess_count">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+      </div>
+      <button onclick="submitPressed()" id="game_submit_button">
+        <p id="game_submit_text">VALIDER</p>
+      </button>
+    </div>
+  </body>
+</html>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/app.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/lobby.js"></script>
+<script src="js/game.js"></script>

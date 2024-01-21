@@ -1,0 +1,100 @@
+#lobby_container main .container:first-child {
+  min-width: min(400px, 100vw);
+}
+
+#lobby_container main .container:last-child {
+  min-width: min(240px, 100vw);
+}
+
+#lobby_container h1,
+#lobby_container h2 {
+  margin: 0;
+  padding: 0;
+}
+
+#lobby_room_id {
+  font-size: 32px;
+  width: 128px;
+  text-align: center;
+  letter-spacing: 4px;
+  font-family: "Roboto Mono", monospace;
+}
+
+#lobby_room_id[disabled] {
+  color: black;
+}
+
+#lobby_container > .lobby {
+  background-color: white;
+}
+
+#lobby_players_list {
+  list-style: none;
+  padding: 0;
+}
+#lobby_players_list > li {
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+input[type="text"] {
+  background-color: rgba(219, 219, 219, 0.8);
+  border: 1px solid white;
+  padding: 4px;
+  margin: 4px;
+  border-radius: 128px;
+  text-align: center;
+  transition: 0.1s;
+}
+
+input[type="text"]:hover,
+input[type="text"]:focus {
+  background-color: rgba(219, 219, 219, 1);
+  transform: scale(1.25);
+}
+
+.select {
+  background: linear-gradient(0deg, white, rgb(219, 219, 219));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  width: fit-content;
+  padding: 4px;
+  gap: 8px;
+}
+
+.select button {
+  min-width: 120px;
+  border-radius: 8px;
+  background: white;
+  transition: 0.1s;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.select button:hover {
+  background-color: rgb(236, 236, 236);
+}
+
+.selected {
+  background: var(--black-bg) !important;
+  color: white !important;
+  font-weight: 900;
+}
+
+.select button img {
+  width: 48px;
+}
+
+.select button p {
+  margin: 0;
+}
+
+.invert {
+  filter: invert();
+}
+
+.selected img {
+  filter: none;
+}

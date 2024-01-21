@@ -1,0 +1,241 @@
+#game_container {
+  justify-content: start;
+}
+
+#game_container > h1 {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+header {
+  width: 100%;
+  background-color: rgb(26, 26, 26);
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  color: white;
+}
+
+header > .teams {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+header .detectives,
+header .spies {
+  margin-left: 16px;
+  color: white;
+}
+
+header > .teams > div {
+  width: calc(50vw - 16px);
+  height: fit-content;
+  border-radius: 8px;
+}
+
+header > .teams > .red {
+  background: var(--red-bg);
+}
+
+header > .teams > .blue {
+  background: var(--blue-bg);
+}
+
+header .remaining span {
+  display: block;
+  text-align: center;
+}
+
+header .remaining .bold {
+  font-size: 24px;
+}
+
+#guess {
+  min-width: min(480px, 100vw);
+  color: white;
+}
+
+#guess h3,
+#guess h1 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#guess_message span:first-of-type {
+  color: gold;
+}
+
+#guess_message span:last-of-type {
+  vertical-align: middle;
+  display: inline-block;
+  color: black;
+  padding: 4px;
+  font-size: 20px;
+  min-width: 24px;
+
+  background-color: white;
+  border-radius: 128px;
+}
+
+#game_player_turn {
+  color: white;
+}
+
+#cards_grid {
+  display: grid;
+  width: min(100vw, 640px);
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 16px;
+  border-radius: 4px;
+  gap: 8px;
+  color: white;
+}
+
+#cards_grid button {
+  width: 120px;
+  height: 64px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: white;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+
+  background-position: center center;
+  background-size: cover;
+
+  word-wrap: break-word;
+  transition: 0.1s ease-in-out;
+}
+
+#cards_grid button:hover {
+  transform: scale(1.25);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  font-weight: 900;
+}
+
+.revealed {
+  color: transparent;
+}
+
+.revealed:hover {
+  color: white;
+}
+
+.chat {
+  text-align: center;
+}
+
+.chat > #messages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-height: 256px;
+  max-height: 256px;
+  overflow-y: scroll;
+  background-color: white;
+}
+
+#messages li {
+  background-color: white;
+  color: black;
+  padding: 4px;
+}
+
+#messages li span.color {
+  padding: 4px;
+  border-radius: 4px;
+  font-weight: 900;
+}
+
+#messages li span.c0 {
+  color: black;
+  background-color: white;
+}
+#messages li span.c1 {
+  color: white;
+  background: var(--red-bg);
+}
+#messages li span.c2 {
+  color: white;
+  background: var(--blue-bg);
+}
+#messages li span.c3 {
+  color: white;
+  background-color: black;
+}
+
+#messages li:first-child {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+#messages li:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#messages li:nth-child(even) {
+  background-color: lightgray;
+}
+
+#game_submit_button {
+  width: fit-content;
+  padding-left: 64px;
+  padding-right: 64px;
+  height: 80px;
+
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: linear-gradient(180deg, #54e521 0%, #339c0e 100%);
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+
+#game_submit_button > p {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #54e521 0%, #eaeaea 35%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  font-weight: 900;
+  font-size: 32px;
+}
+
+#game_submit_button:hover {
+  background: linear-gradient(180deg, rgb(99, 245, 46), #4fd31f 100%);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 920px) {
+  main {
+    flex-direction: column;
+  }
+
+  .chat {
+    width: min(100vw, 480px);
+  }
+
+  .chat h1 {
+    display: none;
+  }
+
+  .chat > #messages {
+    min-height: 128px;
+    max-height: 128px;
+  }
+}
